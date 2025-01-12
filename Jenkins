@@ -1,0 +1,27 @@
+pipeline {
+    agent {'Jenkins-Agent'}
+    tools{
+        jdk 'java-17'
+        mavn 'maven3'
+      }
+    stages {
+        stage('clean workspace') {
+            steps {
+                cleanup ()
+            }
+        }
+        stage('Checkout from SCM') {
+            steps {
+               git
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('test') {
+            steps {
+                sh 'mvn test'
+    }
+}
